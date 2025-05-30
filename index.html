@@ -1,0 +1,103 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pothole Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            max-width: 500px;
+            margin: 20px auto;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #3498db;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .results {
+            max-width: 700px;
+            margin: 30px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .results p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Pothole Detection System</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        <label>Upload Road Video:</label>
+        <input type="file" name="video" accept="video/*" required>
+        <button type="submit">Upload</button>
+    </form>
+
+    {% if pothole_data %}
+    <div class="results">
+        <h2>Results:</h2>
+        <p><strong>Total Potholes Detected:</strong> {{ pothole_data.count }}</p>
+        <p><strong>Approximate Sizes (m³):</strong> {{ pothole_data.sizes }}</p>
+        <p><strong>Cement Required (kg):</strong> {{ cement }}</p>
+
+        <video controls>
+            <source src="{{ video_path }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    {% endif %}
+</body>
+
+</html>
